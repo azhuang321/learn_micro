@@ -6,9 +6,18 @@ import (
 	"github.com/natefinch/lumberjack"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
+
+	"user_srv/global"
 )
 
-func InitLogger(mode string, fileName string, maxSize, maxBackups, maxAge int, compress bool) {
+func InitLogger() {
+	mode := global.Config.RunMod
+	fileName := global.Config.Logger.FileName
+	maxSize := global.Config.Logger.MaxSize
+	maxBackups := global.Config.Logger.MaxBackups
+	maxAge := global.Config.Logger.MaxAge
+	compress := global.Config.Logger.Compress
+
 	// 打印错误级别的日志
 	highPriority := zap.LevelEnablerFunc(func(lvl zapcore.Level) bool {
 		return lvl >= zapcore.WarnLevel

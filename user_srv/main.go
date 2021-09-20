@@ -1,7 +1,9 @@
 package main
 
 import (
+	"fmt"
 	"net"
+	"user_srv/global"
 
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
@@ -12,7 +14,8 @@ import (
 )
 
 func initFrameWork() {
-	initialize.InitLogger("debug", "logs/test.log", 1, 5, 1, false)
+	initialize.InitConfig()
+	initialize.InitLogger()
 }
 
 func main() {
@@ -23,7 +26,7 @@ func main() {
 	userService := handler.UserService{}
 	user_pb.RegisterUserServer(gs, userService)
 
-	lis, err := net.Listen("tcp", ":9000")
+	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", global.Config.Port))
 	if err != nil {
 		zap.S().Fatalf("监听端口出现错误:%s", err.Error())
 		return
