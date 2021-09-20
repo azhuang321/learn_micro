@@ -1,0 +1,38 @@
+syntax = "proto3";
+option go_package = "gen/user_pb;user_pb";
+
+service User {
+  rpc GetUserList(PageInfoRequest) returns(UserListResponse); //用户列表
+  rpc CreateUser(CreateUserInfoRequest) returns(UserInfoResponse); // 添加用户
+}
+
+message PageInfoRequest {
+  uint32 page_num = 1;
+  uint32 page_size = 2;
+}
+
+message CreateUserInfoRequest {
+  string nickname = 1;
+  string password = 2;
+  string mobile = 3;
+  string coupons_num = 4;
+}
+
+message UserInfoResponse {
+  int32 id = 1;
+  string password = 2;
+  string mobile = 3;
+  string nickname = 4;
+  uint64 birthday = 5;
+  uint32 gender = 6;
+  uint32 role = 7;
+
+}
+
+message UserListResponse {
+  int32  total = 1;
+  repeated UserInfoResponse data = 2;
+}
+
+// protoc -I=. --go_out=plugins=grpc,paths=source_relative:gen/go user.proto  生成相对路径
+// protoc -I=. --go_out=plugins=grpc:. user.proto  生成go_package中指定的路径
