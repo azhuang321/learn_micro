@@ -3,6 +3,9 @@ package main
 import (
 	"fmt"
 	"net"
+	"os"
+	"os/signal"
+	"syscall"
 
 	"github.com/satori/go.uuid"
 	"go.uber.org/zap"
@@ -43,26 +46,31 @@ func main() {
 		return
 	}
 
-	waitChan := make(chan interface{})
-
 	go func() {
 		zap.S().Infof("启动服务成功:%s:%d", args["host"], args["port"])
 		if err := gs.Serve(lis); err != nil {
-			waitChan <- err
 			zap.S().Errorf("启动服务失败:%s\n", err.Error())
 		}
 	}()
 
+	u2 := uuid.NewV4()
 	zap.S().Info("开始注册服务中心....")
 	consulRegister, err := register.NewConsulRegister()
 	if err != nil {
 		zap.S().Errorf("注册服务中心失败:%s", err.Error())
 	} else {
-		u2 := uuid.NewV4()
 		if consulRegister.Register(global.Config.ProjectName, fmt.Sprintf("%s", u2), args["host"].(string), args["port"].(int), global.Config.Consul.Tags, nil) {
 			zap.S().Info("注册服务中心成功")
 		}
 	}
 
-	<-waitChan
+	//主进程信号退出
+	quit := make(chan os.Signal)
+	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
+	<-quit
+	zap.S().Info("服务关闭中 ...")
+	zap.S().Info("注销服务中心...")
+	if consulRegister.Deregister(fmt.Sprintf("%s", u2)) {
+		zap.S().Info("注销服务中心成功")
+	}
 }
