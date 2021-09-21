@@ -23,7 +23,7 @@ func main() {
 
 	gs := grpc.NewServer()
 
-	userService := handler.UserService{}
+	userService := &handler.UserService{}
 	user_pb.RegisterUserServer(gs, userService)
 
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", global.Config.Port))

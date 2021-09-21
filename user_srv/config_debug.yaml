@@ -1,4 +1,5 @@
 port: 9000
+md5_salt: "test"
 logger:
   file_name: "logs/test.log"
   max_size: 1

@@ -2,10 +2,11 @@ package config
 
 // Config 全局配置
 type Config struct {
-	RunMod string `mapstructure:"run_mod" json:"run_mod"` //运行模式
-	Port   int32  `mapstructure:"port" json:"port"`       //端启动监听口
-	Logger Logger `mapstructure:"logger" json:"logger"`   //日志配置
-	Mysql  Mysql  `mapstructure:"mysql" json:"mysql"`     //数据库配置
+	RunMod  string `mapstructure:"run_mod" json:"run_mod"`   //运行模式
+	Port    int32  `mapstructure:"port" json:"port"`         //端启动监听口
+	MD5Salt string `mapstructure:"md5_salt" json:"md5_salt"` //加密盐
+	Logger  Logger `mapstructure:"logger" json:"logger"`     //日志配置
+	Mysql   Mysql  `mapstructure:"mysql" json:"mysql"`       //数据库配置
 }
 
 // Logger 日志配置
