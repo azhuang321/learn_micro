@@ -1,4 +1,4 @@
-port: 9000
+project_name: "user_srv"
 md5_salt: "test"
 logger:
   file_name: "logs/test.log"
@@ -13,3 +13,8 @@ mysql:
   database: "test"
   username: "root"
   password: "123123"
+
+consul:
+  host: "127.0.0.1"
+  port: 8500
+  tags: ["test","user_srv"]

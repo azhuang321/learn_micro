@@ -2,6 +2,7 @@ package initialize
 
 import (
 	"fmt"
+	"user_srv/utils"
 
 	"github.com/fsnotify/fsnotify"
 	"github.com/spf13/viper"
@@ -37,7 +38,8 @@ func InitConfig() {
 		panic(err)
 	}
 	global.Config.RunMod = runMod
-	fmt.Printf("配置信息：%+v", *global.Config)
+	fmt.Println("配置信息：")
+	utils.PrettyPrint(*global.Config)
 
 	//动态监控配置文件变化
 	go func() {
@@ -47,7 +49,7 @@ func InitConfig() {
 			_ = v.ReadInConfig() // 读取配置数据
 			_ = v.Unmarshal(global.Config)
 			global.Config.RunMod = runMod
-			fmt.Printf("配置信息：%+v", *global.Config)
+			fmt.Printf("配置信息：%+v\n", *global.Config)
 		})
 	}()
 }
