@@ -5,6 +5,7 @@ go 1.16
 require (
 	github.com/fsnotify/fsnotify v1.5.1
 	github.com/hashicorp/consul/api v1.10.1
+	github.com/mbobakov/grpc-consul-resolver v1.4.4
 	github.com/nacos-group/nacos-sdk-go v1.0.9
 	github.com/natefinch/lumberjack v2.0.0+incompatible
 	github.com/satori/go.uuid v1.2.0

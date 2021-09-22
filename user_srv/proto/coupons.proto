@@ -1,0 +1,14 @@
+syntax = "proto3";
+option go_package = "gen/coupons_pb;coupons_pb";
+import "google/protobuf/empty.proto";
+
+service Coupons {
+  rpc SendCouponsToUser(SendCouponsToUserRequest) returns(google.protobuf.Empty); //赠送积分
+}
+message SendCouponsToUserRequest {
+  string mobile = 1;
+  uint32 coupons_id = 2;
+  uint32 num = 3;
+}
+
+//protoc -I . user.proto --go_out=plugins=grpc:.

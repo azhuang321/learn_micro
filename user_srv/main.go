@@ -9,6 +9,7 @@ func main() {
 	initialize.InitConfig()
 	initialize.InitConfigFromNacos()
 	initialize.InitLogger()
+	initialize.InitSrvConn()
 
 	core.RegisterService()
 	core.MainExit()
