@@ -3,6 +3,7 @@ module user_srv
 go 1.16
 
 require (
+	github.com/apache/rocketmq-client-go/v2 v2.1.0
 	github.com/fsnotify/fsnotify v1.5.1
 	github.com/hashicorp/consul/api v1.10.1
 	github.com/mbobakov/grpc-consul-resolver v1.4.4
