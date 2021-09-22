@@ -1,0 +1,7 @@
+type: google.api.Service
+config_version: 3
+
+http:
+  rules:
+    - selector: learn_grpc_01.TripService.GetTrip #与trip.proto 中的package相对应
+      get: /trip/{id}
