@@ -10,7 +10,7 @@ import (
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 
-	"user_srv/global"
+	"user_srv/config"
 )
 
 func myLogger() logger.Interface {
@@ -28,11 +28,11 @@ func myLogger() logger.Interface {
 func GetDB() (db *gorm.DB, err error) {
 	dsn := fmt.Sprintf(
 		"%s:%s@tcp(%s:%d)/%s?charset=utf8mb4&parseTime=True&loc=Local",
-		global.Config.Mysql.Username,
-		global.Config.Mysql.Password,
-		global.Config.Mysql.Host,
-		global.Config.Mysql.Port,
-		global.Config.Mysql.Database,
+		config.Config.Mysql.Username,
+		config.Config.Mysql.Password,
+		config.Config.Mysql.Host,
+		config.Config.Mysql.Port,
+		config.Config.Mysql.Database,
 	)
 	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{
 		Logger: myLogger(),

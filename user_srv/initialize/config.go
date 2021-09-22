@@ -2,11 +2,12 @@ package initialize
 
 import (
 	"fmt"
-	"user_srv/utils"
 
 	"github.com/fsnotify/fsnotify"
+	uuid "github.com/satori/go.uuid"
 	"github.com/spf13/viper"
-	"user_srv/global"
+
+	"user_srv/config"
 )
 
 // GetEnvInfo 读取系统环境变量
@@ -16,7 +17,10 @@ func GetEnvInfo(env string) string {
 }
 
 func InitConfig() {
+	config.Config.Uuid = uuid.NewV4().String()
+
 	runMod := GetEnvInfo("PRO")
+
 	var configFileName string
 	configFileNamePrefix := "config"
 	if runMod == "PRO" {
@@ -34,12 +38,10 @@ func InitConfig() {
 		panic(err)
 	}
 
-	if err := v.Unmarshal(global.Config); err != nil {
+	if err := v.Unmarshal(config.Config); err != nil {
 		panic(err)
 	}
-	global.Config.RunMod = runMod
-	fmt.Println("配置信息：")
-	utils.PrettyPrint(*global.Config)
+	config.Config.RunMod = runMod
 
 	//动态监控配置文件变化
 	go func() {
@@ -47,9 +49,9 @@ func InitConfig() {
 		v.OnConfigChange(func(e fsnotify.Event) {
 			fmt.Printf("配置信息改变：%s", e.Name)
 			_ = v.ReadInConfig() // 读取配置数据
-			_ = v.Unmarshal(global.Config)
-			global.Config.RunMod = runMod
-			fmt.Printf("配置信息：%+v\n", *global.Config)
+			_ = v.Unmarshal(config.Config)
+			config.Config.RunMod = runMod
+			fmt.Printf("配置信息：%+v\n", *config.Config)
 		})
 	}()
 }

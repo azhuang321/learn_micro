@@ -1,20 +1,15 @@
-project_name: "user_srv"
-md5_salt: "test"
-logger:
-  file_name: "logs/test.log"
-  max_size: 1
-  max_backups: 5
-  max_age: 1
-  compress: false
-
-mysql:
-  host: "127.0.0.1"
-  port: 3306
-  database: "test"
-  username: "root"
-  password: "123123"
-
-consul:
-  host: "127.0.0.1"
-  port: 8500
-  tags: ["test","user_srv"]
+nacos:
+  namespace_id: "user_srv"
+  log_dir: "logs/nacos/log"
+  cache_dir: "logs/nacos/cache"
+  rotate_time: "1h"
+  max_age: 3
+  log_level: "error"
+  username: "nacos"
+  password: "nacos"
+  ip_addr: "127.0.0.1"
+  context_path: "/nacos"
+  port: 8848
+  scheme: "http"
+  data_id: "user_srv.json"
+  group: "dev"

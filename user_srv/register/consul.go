@@ -6,27 +6,29 @@ import (
 	"github.com/hashicorp/consul/api"
 	"go.uber.org/zap"
 
-	"user_srv/global"
+	"user_srv/config"
 )
+
+var SrvRegister = &ConsulRegister{}
 
 type ConsulRegister struct {
 	ConsulCent *api.Client
 }
 
-func NewConsulRegister() (ConsulRegister, error) {
+func NewConsulRegister() (*ConsulRegister, error) {
 	cfg := api.DefaultConfig()
-	cfg.Address = fmt.Sprintf("%s:%d", global.Config.Consul.Host, global.Config.Consul.Port)
+	cfg.Address = fmt.Sprintf("%s:%d", config.Config.Consul.Host, config.Config.Consul.Port)
 	client, err := api.NewClient(cfg)
 
 	consulRegister := ConsulRegister{}
 	if err != nil {
-		return consulRegister, err
+		return nil, err
 	}
 	consulRegister.ConsulCent = client
-	return consulRegister, nil
+	return &consulRegister, nil
 }
 
-func (c ConsulRegister) Register(name, id, address string, port int, tags []string, check *api.AgentServiceCheck) bool {
+func (c *ConsulRegister) Register(name, id, address string, port int, tags []string, check *api.AgentServiceCheck) bool {
 	if check == nil {
 		//生成对应的检查对象
 		check = &api.AgentServiceCheck{
@@ -54,7 +56,7 @@ func (c ConsulRegister) Register(name, id, address string, port int, tags []stri
 	return true
 }
 
-func (c ConsulRegister) Deregister(serviceId string) bool {
+func (c *ConsulRegister) Deregister(serviceId string) bool {
 	err := c.ConsulCent.Agent().ServiceDeregister(serviceId)
 	if err != nil {
 		zap.S().Errorf("下线服务中心失败:%s", err.Error())
@@ -63,7 +65,7 @@ func (c ConsulRegister) Deregister(serviceId string) bool {
 	return true
 }
 
-func (c ConsulRegister) GetAllService() {
+func (c *ConsulRegister) GetAllService() {
 	data, err := c.ConsulCent.Agent().Services()
 	if err != nil {
 		zap.S().Errorf("下线服务中心失败:%s", err.Error())
@@ -74,7 +76,7 @@ func (c ConsulRegister) GetAllService() {
 	}
 }
 
-func (c ConsulRegister) FilterService(filter string) {
+func (c *ConsulRegister) FilterService(filter string) {
 	data, err := c.ConsulCent.Agent().ServicesWithFilter(`Service == "user-web"`)
 	if err != nil {
 		zap.S().Errorf("下线服务中心失败:%s", err.Error())

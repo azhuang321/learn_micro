@@ -9,12 +9,12 @@ import (
 	"fmt"
 	"net"
 
-	"user_srv/global"
+	"user_srv/config"
 )
 
 // MD5 md5字符串
 func MD5(str string) string {
-	salt := global.Config.MD5Salt
+	salt := config.Config.MD5Salt
 	hash := md5.New()
 	hash.Write([]byte(str + salt))
 	return hex.EncodeToString(hash.Sum(nil))
@@ -42,7 +42,7 @@ func GetArgs() map[string]interface{} {
 	flag.IntVar(&port, "p", 9000, "端口号,默认为 9000")
 	flag.Parse()
 
-	if global.Config.RunMod == "debug" {
+	if config.Config.RunMod == "debug" {
 		port, _ = GetFreePort()
 	}
 
