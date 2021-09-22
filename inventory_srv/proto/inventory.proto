@@ -1,0 +1,19 @@
+syntax = "proto3";
+option go_package = "./;proto";
+import "google/protobuf/empty.proto";
+
+service Inventory {
+  rpc SetInv(GoodsInvInfo)returns(google.protobuf.Empty); //设置库存
+  rpc InvDetail(GoodsInvInfo)returns(GoodsInvInfo); //获取库存信息
+  rpc Sell(SellInfo)returns(google.protobuf.Empty);//扣减库存
+  rpc Reback(SellInfo)returns(google.protobuf.Empty);//库存归还
+}
+
+message GoodsInvInfo {
+  int32 goods_id = 1;
+  int32 num = 2;
+}
+
+message SellInfo {
+  repeated GoodsInvInfo goods_info = 1;
+}
