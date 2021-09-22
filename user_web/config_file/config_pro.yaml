@@ -1,0 +1,22 @@
+name: "user_web"
+port: 8001
+user_srv:
+  host: "127.0.0.1"
+  port: 8000
+  name: "user-srv"
+
+jwt:
+  key: "test"
+
+sms:
+  key: "test"
+  secrect: "test"
+  expire: 300
+
+redis:
+  host: "127.0.0.1"
+  port: 6379
+
+consul:
+  host: "127.0.0.1"
+  port: 8500

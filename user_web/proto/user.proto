@@ -1,0 +1,59 @@
+syntax = "proto3";
+option go_package = "./;proto";
+import "google/protobuf/empty.proto";
+
+service User {
+  rpc GetUserList(PageInfoRequest) returns(UserListResponse); //用户列表
+  rpc GetUserByMobile(MobileRequest) returns(UserInfoResponse); //通过mobile查询用户
+  rpc GetUserById(IdRequest) returns(UserInfoResponse); //通过id查询用户
+  rpc CreateUser(CreateUserInfoRequest) returns(UserInfoResponse); // 添加用户
+  rpc UpdateUser(UpdateUserInfoRequest) returns(google.protobuf.Empty);//更新用户
+  rpc CheckPassword(CheckPasswordRequest)returns(CheckPasswordResponse);//检查密码是否一致
+}
+message CheckPasswordRequest {
+  string password = 1;
+  string md5_password = 2;
+}
+message CheckPasswordResponse {
+  bool success = 1;
+}
+
+message PageInfoRequest {
+  uint32 page_num = 1;
+  uint32 page_size = 2;
+}
+message MobileRequest {
+  string mobile = 1;
+}
+message IdRequest {
+  int32 id = 1;
+}
+message CreateUserInfoRequest {
+  string nickname = 1;
+  string password = 2;
+  string mobile = 3;
+}
+message UpdateUserInfoRequest{
+  int32  id = 1;
+  string nickname = 2;
+  uint32 gender = 3;
+  uint64 birthday = 4 ;
+}
+
+message UserInfoResponse {
+  int32 id = 1;
+  string password = 2;
+  string mobile = 3;
+  string nickname = 4;
+  uint64 birthday = 5;
+  uint32 gender = 6;
+  uint32 role = 7;
+
+}
+
+message UserListResponse {
+  int32  total = 1;
+  repeated UserInfoResponse data = 2;
+}
+
+//protoc -I . user.proto --go_out=plugins=grpc:.
