@@ -32,7 +32,8 @@ func RegisterService() {
 	grpc_health_v1.RegisterHealthServer(gs, healthCheckSrv)
 
 	args := utils.GetArgs()
-	lis, err := net.Listen("tcp", fmt.Sprintf("%s:%d", args["host"], args["port"]))
+	//lis, err := net.Listen("tcp", fmt.Sprintf("%s:%d", args["host"], args["port"]))
+	lis, err := net.Listen("tcp", fmt.Sprintf("%s:%d", "0.0.0.0", 9000))
 
 	if err != nil {
 		zap.S().Fatalf("监听端口出现错误:%s", err.Error())
