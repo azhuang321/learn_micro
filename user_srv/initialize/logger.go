@@ -7,16 +7,16 @@ import (
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 
-	"user_srv/config"
+	. "user_srv/config"
 )
 
 func InitLogger() {
-	mode := config.Config.RunMod
-	fileName := config.Config.Logger.FileName
-	maxSize := config.Config.Logger.MaxSize
-	maxBackups := config.Config.Logger.MaxBackups
-	maxAge := config.Config.Logger.MaxAge
-	compress := config.Config.Logger.Compress
+	mode := Config.RunMod
+	fileName := Config.Logger.FileName
+	maxSize := Config.Logger.MaxSize
+	maxBackups := Config.Logger.MaxBackups
+	maxAge := Config.Logger.MaxAge
+	compress := Config.Logger.Compress
 
 	// 打印错误级别的日志
 	highPriority := zap.LevelEnablerFunc(func(lvl zapcore.Level) bool {

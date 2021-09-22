@@ -8,7 +8,7 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/health/grpc_health_v1"
 
-	"user_srv/config"
+	. "user_srv/config"
 	"user_srv/handler"
 	"user_srv/proto/gen/user_pb"
 	"user_srv/register"
@@ -47,7 +47,7 @@ func RegisterService() {
 	}()
 
 	zap.S().Info("开始注册服务中心....")
-	if register.SrvRegister.Register(config.Config.ProjectName, config.Config.Uuid, args["host"].(string), args["port"].(int), config.Config.Consul.Tags, nil) {
+	if register.SrvRegister.Register(Config.ProjectName, Config.Uuid, args["host"].(string), args["port"].(int), Config.Consul.Tags, nil) {
 		zap.S().Info("注册服务中心成功")
 	}
 }

@@ -4,11 +4,11 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
-	"user_srv/register"
 
 	"go.uber.org/zap"
 
-	"user_srv/config"
+	. "user_srv/config"
+	"user_srv/register"
 )
 
 var QuitSignal = make(chan os.Signal)
@@ -19,7 +19,7 @@ func MainExit() {
 	<-QuitSignal
 	zap.S().Info("服务关闭中 ...")
 	zap.S().Info("注销服务中心...")
-	if register.SrvRegister.Deregister(config.Config.Uuid) {
+	if register.SrvRegister.Deregister(Config.Uuid) {
 		zap.S().Info("注销服务中心成功")
 	}
 }

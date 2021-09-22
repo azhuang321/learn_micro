@@ -6,7 +6,7 @@ import (
 	"github.com/hashicorp/consul/api"
 	"go.uber.org/zap"
 
-	"user_srv/config"
+	. "user_srv/config"
 )
 
 var SrvRegister = &ConsulRegister{}
@@ -17,7 +17,7 @@ type ConsulRegister struct {
 
 func NewConsulRegister() (*ConsulRegister, error) {
 	cfg := api.DefaultConfig()
-	cfg.Address = fmt.Sprintf("%s:%d", config.Config.Consul.Host, config.Config.Consul.Port)
+	cfg.Address = fmt.Sprintf("%s:%d", Config.Consul.Host, Config.Consul.Port)
 	client, err := api.NewClient(cfg)
 
 	consulRegister := ConsulRegister{}
