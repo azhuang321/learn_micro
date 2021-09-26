@@ -1,8 +1,8 @@
 package initialize
 
 import (
-	"mxshop_api/user_web/global"
-	"mxshop_api/user_web/utils"
+	"mxshop_api/global"
+	"mxshop_api/utils"
 )
 
 func InitPort() {

@@ -12,9 +12,9 @@ import (
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
 
-	"mxshop_api/user_web/global"
-	"mxshop_api/user_web/proto"
-	"mxshop_api/user_web/utils/otgrpc"
+	"mxshop_api/global"
+	"mxshop_api/proto"
+	"mxshop_api/utils/otgrpc"
 )
 
 func InitSrvConn() {

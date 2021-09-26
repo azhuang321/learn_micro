@@ -13,8 +13,8 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis/v8"
 
-	"mxshop_api/user_web/forms"
-	"mxshop_api/user_web/global"
+	"mxshop_api/forms"
+	"mxshop_api/global"
 )
 
 func GenerateSmsCode(witdh int) string {

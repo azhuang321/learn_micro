@@ -3,8 +3,8 @@ package router
 import (
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
-	"mxshop_api/user_web/api"
-	middlewares "mxshop_api/user_web/middlerwares"
+	"mxshop_api/api"
+	middlewares "mxshop_api/middlerwares"
 )
 
 func InitUserRouter(Router *gin.RouterGroup) {

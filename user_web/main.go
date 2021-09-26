@@ -8,9 +8,9 @@ import (
 
 	"github.com/satori/go.uuid"
 	"go.uber.org/zap"
-	"mxshop_api/user_web/global"
-	"mxshop_api/user_web/initialize"
-	"mxshop_api/user_web/register"
+	"mxshop_api/global"
+	"mxshop_api/initialize"
+	"mxshop_api/register"
 )
 
 //初始化框架

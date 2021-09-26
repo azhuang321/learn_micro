@@ -7,18 +7,18 @@ import (
 	"github.com/alibaba/sentinel-golang/core/base"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/go-redis/redis/v8"
-	"mxshop_api/user_web/models"
+	"mxshop_api/models"
 	"net/http"
 	"strconv"
 	"time"
 
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
-	"mxshop_api/user_web/forms/user"
-	"mxshop_api/user_web/global"
-	"mxshop_api/user_web/global/response"
-	"mxshop_api/user_web/middlerwares"
-	"mxshop_api/user_web/proto"
+	"mxshop_api/forms/user"
+	"mxshop_api/global"
+	"mxshop_api/global/response"
+	"mxshop_api/middlerwares"
+	"mxshop_api/proto"
 )
 
 // GetUserList 获取用户列表

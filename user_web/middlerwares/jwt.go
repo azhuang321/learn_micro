@@ -4,8 +4,8 @@ import (
 	"errors"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
-	"mxshop_api/user_web/global"
-	"mxshop_api/user_web/models"
+	"mxshop_api/global"
+	"mxshop_api/models"
 	"net/http"
 	"time"
 )

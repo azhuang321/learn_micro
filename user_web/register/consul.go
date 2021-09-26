@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/hashicorp/consul/api"
 	"go.uber.org/zap"
-	"mxshop_api/user_web/global"
+	"mxshop_api/global"
 )
 
 type ConsulRegister struct {

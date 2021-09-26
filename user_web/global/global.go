@@ -1,8 +1,8 @@
 package global
 
 import (
-	"mxshop_api/user_web/config"
-	"mxshop_api/user_web/proto"
+	"mxshop_api/config"
+	"mxshop_api/proto"
 )
 
 var (
